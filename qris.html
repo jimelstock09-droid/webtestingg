@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran QRIS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .qris-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 350px;
+        }
+        .qris-card h2 { color: #333; margin-bottom: 5px; }
+        .qris-card p { color: #666; font-size: 14px; margin-bottom: 20px; }
+        .price { font-size: 24px; font-weight: bold; color: #ff0000; margin: 15px 0; }
+        
+        /* Tempat QR Code akan muncul */
+        #qrcode {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+        }
+    </style>
+    <!-- Memanggil Library QR Code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+    <div class="qris-card">
+        <h2>Pembayaran QRIS</h2>
+        <p>Scan menggunakan aplikasi e-Wallet atau m-Banking Anda.</p>
+        
+        <!-- Ini adalah wadah untuk gambar QR -->
+        <div id="qrcode"></div>
+        
+        <div class="price">Rp 150.000</div>
+        <p>ID Transaksi: <strong>INV-998877</strong></p>
+    </div>
+
+    <script>
+        // Simulasi "QRIS Payload" (Data ini nantinya Anda dapatkan dari Backend/Payment Gateway)
+        // Format aslinya jauh lebih panjang, ini hanya contoh format standar QR.
+        const qrisPayloadData = "00020101021226570011ID.CO.QRIS.WWW011893600915300000000002143274291845110303UMI51440014ID.CO.QRIS.WWW0215ID10200200000000303UMI52045411530336054061500005802ID5910NEXUS GAMES6015JAKARTA SELATAN61051234562210714INV-9988776304C92B";
+
+        // Fungsi untuk menggambar/me-render QR Code ke layar
+        const qrcodeContainer = document.getElementById("qrcode");
+        new QRCode(qrcodeContainer, {
+            text: qrisPayloadData,
+            width: 200,
+            height: 200,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+    </script>
+
+</body>
+</html>
